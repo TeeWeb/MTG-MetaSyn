@@ -78,18 +78,22 @@ const App = () => {
   const updateOverlayData = (cardInfo) => {
     let overlayCard;
     console.log("Updating Overlay Data: ", cardInfo);
-    cards.forEach((card) => {
-      if (card.id === cardInfo.id) {
-        overlayCard = card;
-      }
-    });
-    if (!overlayCard) {
-      console.log("Unable to find card ID for Overlay data");
+    if (!cardInfo) {
+      console.log("No Overlay data because no card selected.");
     } else {
-      console.log("Found card for overlay:", overlayCard);
-      setOverlayData(overlayCard);
+      cards.forEach((card) => {
+        if (card.id === cardInfo.id) {
+          overlayCard = card;
+        }
+      });
+      if (!overlayCard) {
+        console.log("Unable to find card ID for Overlay data");
+      } else {
+        console.log("Found card for overlay:", overlayCard);
+        setOverlayData(overlayCard);
+      }
+      return overlayData;
     }
-    return overlayData;
   };
 
   // const updateActiveColors = (activeColors) => {
