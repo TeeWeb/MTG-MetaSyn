@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
-const Plane = ({ cards, origins, handleUpdateOverlayData }) => {
+const Plane = ({
+  cards,
+  origins,
+  handleUpdateOverlayData,
+  handleUpdateSelectedCard,
+}) => {
   const [displayedCards, setDisplayedCards] = useState([cards]);
   const [selectedCard, setSelectedCard] = useState();
 
-  const selectCard = (isActive, cardKey, name, imageUrl) => {
+  const selectCard = (isActive, cardKey, name, imageUrl, position) => {
     if (isActive) {
       setSelectedCard();
     } else {
-      console.log("Selecting card:", cardKey, name, imageUrl);
-      setSelectedCard(cardKey);
+      console.log("Selecting card:", cardKey, name, imageUrl, position);
+      setSelectedCard({ id: cardKey, pos: position, img: imageUrl });
+      handleUpdateSelectedCard(position);
     }
   };
 
   useEffect(() => {
-    console.log("Currently selected card: " + selectedCard);
+    if (!selectedCard) {
+      console.log("No card currently selected");
+    } else {
+      console.log(
+        "Currently selected card: ",
+        selectedCard.id,
+        selectedCard.pos
+      );
+    }
     handleUpdateOverlayData(selectedCard);
   }, [selectedCard]);
 

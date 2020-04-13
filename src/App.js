@@ -15,7 +15,8 @@ import { update } from "react-spring/three";
 const App = () => {
   extend({ OrbitControls });
   const [cards, setCards] = useState([]);
-  const [overlayData, setOverlayData] = useState([]);
+  const [overlayData, setOverlayData] = useState();
+  const [selectedCardPos, setSelectedCardPos] = useState();
   // const [activeColors, setActiveColors] = useState([]);
 
   const origins = {
@@ -62,12 +63,23 @@ const App = () => {
     setCards(filteredCards);
   }
 
-  const updateOverlayData = (id) => {
-    setOverlayData();
+  const updateSelectedCard = (cardInfo) => {
+    let selectedCard = cardInfo;
+    console.log("Updating selected card:", selectedCard);
+    if (!selectedCard) {
+      setSelectedCardPos([0, 0, 0]);
+    } else {
+      setSelectedCardPos(selectedCard);
+    }
+
+    return selectedCard;
+  };
+
+  const updateOverlayData = (cardInfo) => {
     let overlayCard;
-    console.log("Updating Overlay Data: ", id);
+    console.log("Updating Overlay Data: ", cardInfo);
     cards.forEach((card) => {
-      if (card.id === id) {
+      if (card.id === cardInfo.id) {
         overlayCard = card;
       }
     });
@@ -75,8 +87,9 @@ const App = () => {
       console.log("Unable to find card ID for Overlay data");
     } else {
       console.log("Found card for overlay:", overlayCard);
-      setOverlayData(overlayCard.imageUrl);
+      setOverlayData(overlayCard);
     }
+    return overlayData;
   };
 
   // const updateActiveColors = (activeColors) => {
@@ -105,13 +118,16 @@ const App = () => {
         }}
       >
         <fog attach="fog" args={["gray", 250, 400]} />
-        <Controls />
+        <Controls selectedCard={selectedCardPos} />
         <Plane
           cards={cards}
           origins={origins}
-          handleUpdateOverlayData={(name, imageUrl) =>
-            updateOverlayData(name, imageUrl)
+          handleUpdateOverlayData={(overlayData) =>
+            updateOverlayData(overlayData)
           }
+          handleUpdateSelectedCard={(selectedCard) => {
+            updateSelectedCard(selectedCard);
+          }}
         />
         <ambientLight intensity={0.75} />
         <spotLight position={[0, 100, 150]} penumbra={0.15} castShadow />

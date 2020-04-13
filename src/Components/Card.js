@@ -140,7 +140,7 @@ const Card = ({
 
   const handleOnClick = () => {
     setActive(!active);
-    handleSelectCard(active, id, name, imageUrl);
+    handleSelectCard(active, id, name, imageUrl, calculatedPosition);
 
     console.log(
       name,
