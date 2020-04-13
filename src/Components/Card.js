@@ -46,8 +46,8 @@ const convertColorIdsToPosArrays = (colorIdArray) => {
 };
 
 const convertCmcToYValue = (cmcData) => {
-  let yValue = (cmcData + 0.1) * 10;
-  return yValue;
+  let zValue = (cmcData + 0.1) * 10;
+  return zValue;
 };
 
 const normalizeColors = (prevColors) => {
@@ -130,6 +130,7 @@ const Card = ({
         : baseScale,
     position: calculatedPosition,
     colors: normalizeColors(colors),
+    opacity: active || hovered ? 1.0 : 0.6,
   });
 
   useFrame(() => {
@@ -168,7 +169,8 @@ const Card = ({
         attach="material"
         color={props.colors}
         clearcloat={0.5}
-        transparency={0.7}
+        transparent={true}
+        opacity={props.opacity}
       />
     </a.mesh>
   );

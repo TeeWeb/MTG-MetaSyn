@@ -7,9 +7,13 @@ extend({ OrbitControls });
 const Controls = ({ selectedCard }) => {
   const { camera, gl } = useThree();
   const orbitRef = useRef();
+<<<<<<< HEAD
   const [cardInFocus, setCardInFocus] = useState([0, 0, 0]);
   camera.up.set(0, 1, 0);
   camera.focus = 0;
+=======
+  camera.position.set(0, 100, 150);
+>>>>>>> f7789095c4298428e90baad69b5397b6e4f544f9
   camera.aspect = window.innerWidth / window.innerHeight;
 
   useEffect(() => {
