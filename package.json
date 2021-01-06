@@ -25,7 +25,7 @@
     "prettier": "^2.0.2"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "mtgsdk": "^0.4.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
