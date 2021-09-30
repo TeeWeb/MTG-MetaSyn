@@ -1,0 +1,49 @@
+{
+  "name": "mtg-metasyn",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "server": "cd ../server/app && flask run --host=localhost --no-debugger",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier \"./**/*.{js, html}\" --write",
+    "lint": "eslint \"./**/*.{js, jsx}\" --quiet",
+    "dev": "webpack serve --mode development",
+    "webpack": "webpack",
+    "prod": "npm run webpack -- --mode production",
+    "clean": "rm -r ./dist ./.cache",
+    "build": "webpack"
+  },
+  "author": "TeeWeb",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-syntax-jsx": "^7.14.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.14.5",
+    "@webpack-cli/serve": "^1.5.2",
+    "babel-loader": "^8.0.6",
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "prettier": "^2.0.2",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^4.3.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.4",
+    "mtgsdk": "^0.4.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-spring": "^8.0.27",
+    "react-three-fiber": "^4.0.25",
+    "three": "^0.132.2"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions"
+  ]
+}
