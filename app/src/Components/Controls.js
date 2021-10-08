@@ -21,7 +21,7 @@ const Controls = ({ selectedCard }) => {
       cardInFocus[1] + 100,
       cardInFocus[2] + 125
     );
-  }, [selectedCard]);
+  }, [selectedCard, camera.position, cardInFocus]);
 
   // console.log("cardInFocus Position: ", cardInFocus);
 

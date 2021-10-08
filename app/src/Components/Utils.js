@@ -41,6 +41,9 @@ export const convertColorIdsToPosArrays = (colorIdArray) => {
         case "G":
           posArrays.push(origins.green);
           break;
+        default:
+          posArrays.push(origins.colorless);
+          break;
       }
     });
   }
@@ -77,6 +80,9 @@ export const normalizeColors = (colorIdentity) => {
         case "G":
           normalizedColors = "green";
           break;
+        default:
+          normalizedColors = "gray";
+          break;
       }
     });
   }
@@ -91,7 +97,7 @@ const extractXYValues = (coordArrays) => {
     coordArrays.forEach((array) => {
       xValues.push(array[0]);
       yValues.push(array[1]);
-    })
+    });
   } else if (typeof coordArrays[0][0][0] == "number") {
     coordArrays.forEach((coordArray) => {
       coordArray.forEach((array) => {
@@ -100,7 +106,9 @@ const extractXYValues = (coordArrays) => {
       });
     });
   } else {
-    console.log("Too many nested arrays... Double-check the coordArrays passed to extractXYValues()")
+    console.log(
+      "Too many nested arrays... Double-check the coordArrays passed to extractXYValues()"
+    );
   }
 
   const xyValues = {};
@@ -147,7 +155,7 @@ export const getSynergisticCards = (
     return;
   } else {
     // Get an array of all visible cards without the currently selected card
-    let otherCards = cards.filter((card) => card.id != selectedCardKey);
+    let otherCards = cards.filter((card) => card.id !== selectedCardKey);
     // Reset any previous synergy calculations
     otherCards.forEach((card) => (card.synergy = 0));
 
@@ -161,6 +169,7 @@ export const getSynergisticCards = (
         });
       } else {
         for (let i = 0; i < colorId.length; i++) {
+          // eslint-disable-next-line
           otherCards.forEach((card, j, array) => {
             colorString = card.colorIdentity.join("");
             if (!array[j].synergy) {

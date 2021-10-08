@@ -2,12 +2,9 @@ FROM node:14.17.6
 
 WORKDIR /src
 
-ENV PATH /src/node_modules/.bin:$PATH
-
-COPY package*.json ./
+COPY package.json ./
+COPY yarn.lock ./
 COPY . ./
-RUN npm install --production
-EXPOSE 1234
-RUN npm install react-scripts@3.4.1 -g
+RUN yarn install --production
 
-CMD npm run build
+CMD npx serve build -l 5001

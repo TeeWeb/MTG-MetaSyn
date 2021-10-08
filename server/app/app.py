@@ -8,7 +8,7 @@ def data_utils():
     def retrieve_all_types():
         print("Downloading MTG types data...")
         types_req = requests.get('https://api.magicthegathering.io/v1/types')
-        if types_req.status_code is 200:
+        if types_req.status_code == 200:
             with open('./data/types.yaml', 'w') as f:
                 f.write(str(types_req.json()))
         else:
@@ -17,7 +17,7 @@ def data_utils():
     def retrieve_all_sets():
         print("Downloading MTG sets data...")
         sets_req = requests.get('https://api.magicthegathering.io/v1/sets')
-        if sets_req.status_code is 200:
+        if sets_req.status_code == 200:
             with open('./data/sets.yaml', 'w') as f:
                 f.write(str(sets_req.json()))
         else:
@@ -26,7 +26,7 @@ def data_utils():
     def retrieve_all_keywords():
         print("Downloading MTG keywords data...")
         keywords_req = requests.get('https://mtgjson.com/api/v5/Keywords.json')
-        if keywords_req.status_code is 200:
+        if keywords_req.status_code == 200:
             with open('./data/keywords.yaml', 'w') as f:
                 f.write(str(keywords_req.json()))
         else:
