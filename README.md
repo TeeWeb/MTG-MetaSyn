@@ -26,16 +26,17 @@ The app is built in React and uses ThreeJS to display a 3D space in which the us
 
 In the future, could add a Decklist Import feature to allow users to upload decklists and have a visual reference for the relationships between the cards in their decks. This feature could also include a graph displaying the deck's Mana Curve and other deck information.
 
-## Setup
+## Development Setup (Individual Processes)
 
 ### Frontend (ReactJS)
 
-- Install dependencies: `npm install`
-- Start app: `npm run dev`
+- Change directory to /app and setup frontend app: `cd ./app`
+- Install dependencies: `yarn install`
+- Start app: `yarn start`
 
 ### Server (Flask/Python)
 
-- Change directory to server and setup Python virtual environment: `cd ./server`
+- Change directory to /server and setup Python virtual environment: `cd ./server`
   - On MacOS/Linux:
     - `python3 -m venv venv`
     - `source venv/bin/activate`
@@ -43,4 +44,22 @@ In the future, could add a Decklist Import feature to allow users to upload deck
     - `python -m venv venv`
     - `source venv/Scripts/activate`
 - Install dependencies: `pip install -r requirements.txt`
-- Start server: `npm run server`
+- Start server: `flask run --host=localhost`
+
+## Running the app with Docker
+
+From the project's root directory, run:
+- `docker-compose up --build`
+
+This will build and run the three Docker containers: 
+- Nginx (mtg-metasyn_nginx)
+- ReactJS App (mtg-metasyn_app)
+- Flask Server (mtg-metasyn_server)
+## Production Setup
+
+- Create production-ready build for frontend app:
+  - `cd ./app`
+  - `yarn build`
+  - `cd ..`
+- Migrate the 
+  - `docker-compose up --build -d`

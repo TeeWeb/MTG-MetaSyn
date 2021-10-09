@@ -2,19 +2,15 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSpring, a } from "react-spring/three";
 import { useFrame, useLoader } from "react-three-fiber";
 import * as THREE from "three";
-import { TextureLoader } from "three";
 
+import w_mana from "../textures/w.png";
+import b_mana from "../textures/b.png";
+import r_mana from "../textures/r.png";
+import g_mana from "../textures/g.png";
+import u_mana from "../textures/u.png";
+import c_mana from "../textures/colorless.png";
 
-import w_mana from "../textures/w.png"
-import b_mana from "../textures/b.png"
-import r_mana from "../textures/r.png"
-import g_mana from "../textures/g.png"
-import u_mana from "../textures/u.png"
-import c_mana from "../textures/colorless.png"
-
-import {
-  normalizeColors
-} from "./Utils";
+import { normalizeColors } from "./Utils";
 import "./Card.css";
 
 const Card = ({
@@ -35,10 +31,16 @@ const Card = ({
   types,
   subtypes,
   text,
-  multiverseId
+  multiverseId,
 }) => {
   const threeJSColors = normalizeColors(colorIdentity);
-  // const texture = useLoader(THREE.TextureLoader, "../img/5color-texture.png");
+
+  const whiteTexture = useLoader(THREE.TextureLoader, w_mana);
+  const blackTexture = useLoader(THREE.TextureLoader, b_mana);
+  const blueTexture = useLoader(THREE.TextureLoader, u_mana);
+  const redTexture = useLoader(THREE.TextureLoader, r_mana);
+  const greenTexture = useLoader(THREE.TextureLoader, g_mana);
+  const colorlessTexture = useLoader(THREE.TextureLoader, c_mana);
 
   const meshRef = useRef();
   const baseScale = [1, 1, 1];
@@ -47,29 +49,29 @@ const Card = ({
   // const [isColorless, setColorless] = useState(false);
 
   const getTexture = () => {
-    let texture = {}
+    let texture = {};
     switch (threeJSColors) {
       case "white":
-        texture = useLoader(THREE.TextureLoader, w_mana)
+        texture = whiteTexture;
         break;
       case "black":
-        texture = useLoader(THREE.TextureLoader, b_mana)
+        texture = blackTexture;
         break;
       case "blue":
-        texture = useLoader(THREE.TextureLoader, u_mana)
+        texture = blueTexture;
         break;
       case "red":
-        texture = useLoader(THREE.TextureLoader, r_mana)
+        texture = redTexture;
         break;
       case "green":
-        texture = useLoader(THREE.TextureLoader, g_mana)
+        texture = greenTexture;
         break;
       default:
-        texture = useLoader(THREE.TextureLoader, c_mana)
+        texture = colorlessTexture;
         break;
     }
-    texture.mapping = THREE.EquirectangularReflectionMapping
-    return texture
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    return texture;
   };
 
   const props = useSpring({
@@ -118,14 +120,14 @@ const Card = ({
   };
 
   const handleOnPointerOver = () => {
-    setHovered(true)
-    handleHoverCard(id)
-  }
+    setHovered(true);
+    handleHoverCard(id);
+  };
 
   const handleOnPointerOut = () => {
-    setHovered(false)
-    handleHoverOff(id)
-  }
+    setHovered(false);
+    handleHoverOff(id);
+  };
 
   return (
     <a.mesh

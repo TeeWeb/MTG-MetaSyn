@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { render } from "react-dom";
-import { Canvas, extend } from "react-three-fiber";
+import { Canvas } from "react-three-fiber";
 import * as THREE from "three";
-import mtg, { card } from "mtgsdk";
+import mtg from "mtgsdk";
 
 import Controls from "./Components/Controls";
 import Plane from "./Components/Plane";
@@ -12,7 +12,6 @@ import Overlay from "./Components/Overlay";
 const App = () => {
   const [cards, setCards] = useState([]);
   const [overlayData, setOverlayData] = useState([]);
-  // const [activeColors, setActiveColors] = useState([]);
 
   const origins = {
     colorless: [0, 0, 0],
@@ -30,7 +29,6 @@ const App = () => {
     keyword,
     type
   ) {
-    console.log("Requesting Cards: ", cardSet, type);
     const filteredCards = [];
     const cardData = await mtg.card
       .where({
@@ -42,8 +40,6 @@ const App = () => {
       });
 
     cardData.forEach((card) => {
-      // TODO: Determine how to handle duplicate cards/alternate artwork
-      // Update 10/22/20: Found that many duplicates were missing multiverseIds. Added function to "prune" those from [allCards] state in <Plane /> component.
       if (card.imageUrl) {
         filteredCards.push(card);
       } else {
@@ -68,23 +64,9 @@ const App = () => {
     if (!overlayCard) {
       console.log("Unable to find card ID for Overlay data");
     } else {
-      // console.log("Found card for overlay:", overlayCard);
       setOverlayData(overlayCard.imageUrl);
     }
   };
-
-  // const updateActiveColors = (activeColors) => {
-  //   console.log(activeColors);
-  //   let cardArray = [];
-  //   mtg.card
-  //     .all({ colorIdentity: activeColors, set: "ELD" })
-  //     .on("data", (card) => {
-  //       cardArray.push(card);
-  //     });
-  //   console.log(cardArray);
-
-  //   setCards(cardArray);
-  // };
 
   useEffect(() => {
     setCards([]);
