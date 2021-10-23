@@ -48,6 +48,10 @@ In the future, could add a Decklist Import feature to allow users to upload deck
     - `python -m venv venv`
     - `.\venv\Scripts\activate`
 - Install dependencies: `pip install -r requirements.txt`
+- Add a `config.yaml` file into the server/ directory. This file should contain the following key/value pairs, and should never be commited to git repo:
+  - "mongodb_uri": <URL to MongoDB>
+  - "username": <database username used to access MongoDB>
+  - "pw": <database password>
 - Start server: `flask run --host=localhost`
 
 ## Running the app with Docker
